@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load the dataset with proper column names
+# Load dataset 
 columns = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation', 'relationship', 
            'race', 'gender', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income']
-data = pd.read_csv(r'C:/Projects/FODS_2024/adult.data.csv', names=columns, skipinitialspace=True)
+data = pd.read_csv(r'FODS_2024/adult.data.csv', names=columns, skipinitialspace=True)
 
 # Checking Data Quality - Missing Data - Duplicates - Types - Inspecting Values
 
@@ -13,11 +13,10 @@ print(data.shape)
 print(data.isnull().sum())
 print(data.duplicated().sum())
 print(data.dtypes)
-print(data.head())
 # for column in columns:
 #    print(data[column].value_counts())
 
-# Data Cleaning - Removing Duplicates, Replacing "?" values, Trimming whitespace, Remove unused column
+# Data Cleaning - Removing Duplicates, Replacing "?" valu es, Trimming whitespace, Remove unused column
 
 cleaned_data = data.copy()
 cleaned_data = cleaned_data.drop_duplicates()
@@ -86,7 +85,7 @@ education_sorted = sorted(education_levels, key=lambda x: custom_order.index(x))
 # Calculate avg working hours for plot Q3
 occupation_avg_hours = cleaned_data.groupby('occupation')['hours-per-week'].mean().sort_values()
 
-# Question 1: How does age impact individuals earning above and below $50K
+# Question 1: How does age impact individuals earning above and below $50K?
 plt.figure(figsize=(12, 8)) 
 ax = sns.histplot(
     data=cleaned_data,
@@ -118,7 +117,7 @@ plt.figtext(0.5, 0.01, 'This histogram shows the age distribution among individu
                         'The plot highlights which age groups are most prevalent in each income category, with mean ages '
                         'indicated by vertical lines.', wrap=True, ha='center', fontsize=12)
 
-# Question 2: Education level correlation with income
+# Question 2: How does education level correlate with income?
 plt.figure(figsize=(12, 8))
 sns.set_palette("muted")
 
@@ -140,20 +139,18 @@ plt.grid(axis='x', linestyle='--', alpha=0.7)
 for container in ax.containers:
     ax.bar_label(container, fmt='%d', fontsize=10, padding=3)
 
-plt.subplots_adjust(bottom=0.15)  # Increase the bottom margin
+plt.subplots_adjust(bottom=0.15)
 plt.figtext(0.5, 0.01, 'This barchart counts the frequencey of income above and below 50.000$ across different education levels. '
                         'It provides insights into how educational levels correlates with income.', 
                         wrap=True, ha='center', fontsize=12)
 
-# Question 3: Distribution of income across different occupations
+# Question 3: Are there professions that work more than others?
 plt.figure(figsize=(14, 8))
 plt.plot(occupation_avg_hours.index, occupation_avg_hours.values, marker='o', color='b', label='Average Hours')
 
-# Display Average
 overall_avg = cleaned_data['hours-per-week'].mean()
 plt.axhline(overall_avg, color='r', linestyle='--', linewidth=1, label='Overall Average')
 
-# Data labels
 for i, (occupation, hours) in enumerate(occupation_avg_hours.items()):
     plt.text(i, hours + 0.3, f'{hours:.1f}', ha='center', va='bottom', fontsize=8)
 
@@ -170,7 +167,7 @@ plt.figtext(0.5, 0.01, 'This linechart shows the average hours worked per week a
 
 
 
-# Question 4: Differences in income based on gender
+# Question 4: Are there any significant differences in income based on gender?
 plt.figure(figsize=(10, 6))
 ax = sns.countplot(data=cleaned_data, x='gender', hue='income', palette='muted')
 plt.title('Gender Distribution by Income Level')
@@ -184,7 +181,7 @@ plt.figtext(0.5, 0.01, 'This countplot displays the distribution of income level
 for container in ax.containers:
     ax.bar_label(container)
 
-# Question 5: Working hours by race and income level:
+# Question 5: How do race, working hours and income level corelate with eachother?
 sns.set_theme(style="whitegrid")
 
 plt.figure(figsize=(14, 8))
