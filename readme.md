@@ -4,7 +4,7 @@
 
 ## Motivation/Goal
 
-My motivation behind this project is to explore the factors influencing income levels in the dataset. The goal is to identify key factors of income levels and understand the distribution of income across different groups.
+My motivation behind this project is to explore the factors influencing income levels in the dataset. I want to identify key factors of income levels and understand the distribution of income across different groups.
 
 ## Questions I Plan to Analyze
 
