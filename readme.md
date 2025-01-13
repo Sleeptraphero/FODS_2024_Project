@@ -21,7 +21,7 @@ The dataset used in this analysis is derived from: [Kaggle - Adult Incomes in th
 ### Data Quality
 
 - There are no missing values in any of the columns.
-- Numerical columns like age, capital gain/loss, and hours per week are of type `int` as they should be.
+- Numerical columns like age, capital gain/loss, and hours per week are of type int as they should be.
 - There are 24 duplicates in the dataset.
 
 ### Describing the Dataset
